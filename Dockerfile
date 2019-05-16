@@ -1,7 +1,7 @@
 FROM golang:1.12-alpine3.9 AS build
 RUN apk add --no-cache curl gcc musl-dev
 WORKDIR /go/src/github.com/keybase
-ARG KEYBASE_VERSION=3.2.2
+ARG KEYBASE_VERSION=4.0.0
 RUN curl -L "https://github.com/keybase/client/archive/v${KEYBASE_VERSION}.tar.gz" | tar xz && mv "client-${KEYBASE_VERSION}" client
 WORKDIR ./client/go
 RUN go build -tags production -o /keybase ./keybase
