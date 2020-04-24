@@ -1,3 +1,6 @@
 #!/bin/sh
-keybase --no-debug oneshot
+export KEYBASE_AUTO_FORK=0
+keybase service &
+keybase ctl wait
+keybase oneshot
 exec "$@"
