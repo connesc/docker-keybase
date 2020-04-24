@@ -8,13 +8,9 @@ WORKDIR ./client/go
 RUN go build -tags production -o /keybase ./keybase
 RUN go build -tags production -o /kbfsfuse ./kbfs/kbfsfuse
 
-FROM arm64v8/alpine:3.11 AS base
+FROM arm64v8/alpine:3.11
 COPY --from=multiarch/qemu-user-static:aarch64-4.2.0-6 /usr/bin/qemu-*-static /usr/bin/
 RUN apk add --no-cache fuse
-RUN rm /usr/bin/qemu-*-static
-
-FROM scratch
-COPY --from=base / /
 COPY --from=build /keybase /kbfsfuse /usr/local/bin/
 COPY entrypoint.sh /usr/local/bin/docker-entrypoint
 ENTRYPOINT ["docker-entrypoint"]
