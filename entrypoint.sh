@@ -1,3 +1,3 @@
 #!/bin/sh
-keybase oneshot
+keybase --no-debug oneshot
 exec "$@"
