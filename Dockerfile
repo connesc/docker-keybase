@@ -4,6 +4,7 @@ RUN apk add --no-cache curl gcc musl-dev xz
 WORKDIR /go/src/github.com/keybase
 ARG KEYBASE_VERSION=5.4.0
 RUN curl -L "https://github.com/keybase/client/releases/download/v${KEYBASE_VERSION}/keybase-v${KEYBASE_VERSION}.tar.xz" | tar xJ && mv "client-v${KEYBASE_VERSION}" client
+WORKDIR ./client/go
 RUN go build -tags production -o /keybase ./keybase
 RUN go build -tags production -o /kbfsfuse ./kbfs/kbfsfuse
 
